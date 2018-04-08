@@ -1,0 +1,666 @@
+octave:1> symbolic
+error: 'symbolic' undefined near line 1 column 1
+octave:1> symbols
+error: 'symbols' undefined near line 1 column 1
+octave:1> sym('b')
+OctSymPy v2.6.0: this is free software without warranty, see source.
+Initializing communication with SymPy using a popen2() pipe.
+Some output from the Python subprocess (pid 18656) might appear next.
+Python 2.7.5 (default, Aug  4 2017, 00:39:18) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> >>> 
+OctSymPy: Communication established.  SymPy v1.1.2.dev.
+ans = (sym) b
+octave:2> -b
+error: 'b' undefined near line 1 column 2
+octave:2> -sym('b')
+ans = (sym) -b
+octave:3> rx(a,b)=[1 0 0 ; 0 cos(a) -sin(b) ; 0 sin(a) cos(b)
+> > ]
+error: 'a' undefined near line 1 column 22
+octave:3> rx(a,b)=[1 0 0 ; 0 cos(a) -sin(b) ; 0 sin(a) cos(b)]
+error: 'a' undefined near line 1 column 22
+octave:3> syms a, b
+error: 'b' undefined near line 1 column 10
+octave:3> syms a b
+octave:4> rx = [1 0 0 ; 0 cos(a) -sin(b) ; 0 sin(a) cos(b)]
+error: octave_base_value::map_value(): wrong type argument 'scalar'
+octave:4> rx = [1 0 0 ; 0 cos(a), -sin(b) ; 0 sin(a) cos(b)]
+error: octave_base_value::map_value(): wrong type argument 'scalar'
+octave:4> rx
+error: 'rx' undefined near line 1 column 1
+octave:4> a
+a = (sym) a
+octave:5> b
+b = (sym) b
+octave:6> rx = [1 0 0 ; 0 cos(a), -sin(b) ; 0 sin(a) cos(b)]
+error: octave_base_value::map_value(): wrong type argument 'scalar'
+octave:6> rx = [[1 0 0] ; [0 cos(a), -sin(b)] ; [0 sin(a) cos(b)]]
+rx = (sym 3×3 matrix)
+
+  ⎡1    0        0   ⎤
+  ⎢                  ⎥
+  ⎢0  cos(a)  -sin(b)⎥
+  ⎢                  ⎥
+  ⎣0  sin(a)  cos(b) ⎦
+
+octave:7> rx = [[1 0 0] ; [0 cos(a), -sin(a)] ; [0 sin(a) cos(a)]]
+rx = (sym 3×3 matrix)
+
+  ⎡1    0        0   ⎤
+  ⎢                  ⎥
+  ⎢0  cos(a)  -sin(a)⎥
+  ⎢                  ⎥
+  ⎣0  sin(a)  cos(a) ⎦
+
+octave:8> rz = [[cos(b) -sin(b) 0] [sin(b) cos(b) 0] [0 0 1]]
+rz = (sym) [cos(b)  -sin(b)  0  sin(b)  cos(b)  0  0  0  1]  (1×9 matrix)
+octave:9> rz = [[cos(b) -sin(b) 0] ; [sin(b) cos(b) 0] ; [0 0 1]]
+rz = (sym 3×3 matrix)
+
+  ⎡cos(b)  -sin(b)  0⎤
+  ⎢                  ⎥
+  ⎢sin(b)  cos(b)   0⎥
+  ⎢                  ⎥
+  ⎣  0        0     1⎦
+
+octave:10> rx, rz
+rx = (sym 3×3 matrix)
+
+  ⎡1    0        0   ⎤
+  ⎢                  ⎥
+  ⎢0  cos(a)  -sin(a)⎥
+  ⎢                  ⎥
+  ⎣0  sin(a)  cos(a) ⎦
+
+rz = (sym 3×3 matrix)
+
+  ⎡cos(b)  -sin(b)  0⎤
+  ⎢                  ⎥
+  ⎢sin(b)  cos(b)   0⎥
+  ⎢                  ⎥
+  ⎣  0        0     1⎦
+
+octave:11> rx * rz
+ans = (sym 3×3 matrix)
+
+  ⎡   cos(b)         -sin(b)        0   ⎤
+  ⎢                                     ⎥
+  ⎢sin(b)⋅cos(a)  cos(a)⋅cos(b)  -sin(a)⎥
+  ⎢                                     ⎥
+  ⎣sin(a)⋅sin(b)  sin(a)⋅cos(b)  cos(a) ⎦
+
+octave:12> rz * rx
+ans = (sym 3×3 matrix)
+
+  ⎡cos(b)  -sin(b)⋅cos(a)  sin(a)⋅sin(b) ⎤
+  ⎢                                      ⎥
+  ⎢sin(b)  cos(a)⋅cos(b)   -sin(a)⋅cos(b)⎥
+  ⎢                                      ⎥
+  ⎣  0         sin(a)          cos(a)    ⎦
+
+octave:13> base = [.5 0 0 ; 0 .5 0 ; 0 0 .5 ]
+base =
+
+   0.50000   0.00000   0.00000
+   0.00000   0.50000   0.00000
+   0.00000   0.00000   0.50000
+
+octave:14> rz * rx * base
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+ans = (sym 3×3 matrix)
+
+  ⎡cos(b)  -sin(b)⋅cos(a)    sin(a)⋅sin(b) ⎤
+  ⎢──────  ───────────────   ───────────── ⎥
+  ⎢  2            2                2       ⎥
+  ⎢                                        ⎥
+  ⎢sin(b)   cos(a)⋅cos(b)   -sin(a)⋅cos(b) ⎥
+  ⎢──────   ─────────────   ───────────────⎥
+  ⎢  2            2                2       ⎥
+  ⎢                                        ⎥
+  ⎢            sin(a)           cos(a)     ⎥
+  ⎢  0         ──────           ──────     ⎥
+  ⎣              2                2        ⎦
+
+octave:15> subs(rz * rx * base, {a b}, {0 0})
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+ans = (sym 3×3 matrix)
+
+  ⎡1/2   0    0 ⎤
+  ⎢             ⎥
+  ⎢ 0   1/2   0 ⎥
+  ⎢             ⎥
+  ⎣ 0    0   1/2⎦
+
+octave:16> subs(rz * rx * base, {a b}, {pi/4 0})
+!!! OUT OF TIME !!!
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans = (sym 3×3 matrix)
+
+  ⎡1/2  0    0  ⎤
+  ⎢             ⎥
+  ⎢     √2  -√2 ⎥
+  ⎢ 0   ──  ────⎥
+  ⎢     4    4  ⎥
+  ⎢             ⎥
+  ⎢     √2   √2 ⎥
+  ⎢ 0   ──   ── ⎥
+  ⎣     4    4  ⎦
+
+
+octave:17> subs(rz * rx * base, {a b}, {0 pi/4})
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans = (sym 3×3 matrix)
+
+  ⎡√2  -√2      ⎤
+  ⎢──  ────   0 ⎥
+  ⎢4    4       ⎥
+  ⎢             ⎥
+  ⎢√2   √2      ⎥
+  ⎢──   ──    0 ⎥
+  ⎢4    4       ⎥
+  ⎢             ⎥
+  ⎣0    0    1/2⎦
+
+octave:18> rot = rz * rx * base
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+rot = (sym 3×3 matrix)
+
+  ⎡cos(b)  -sin(b)⋅cos(a)    sin(a)⋅sin(b) ⎤
+  ⎢──────  ───────────────   ───────────── ⎥
+  ⎢  2            2                2       ⎥
+  ⎢                                        ⎥
+  ⎢sin(b)   cos(a)⋅cos(b)   -sin(a)⋅cos(b) ⎥
+  ⎢──────   ─────────────   ───────────────⎥
+  ⎢  2            2                2       ⎥
+  ⎢                                        ⎥
+  ⎢            sin(a)           cos(a)     ⎥
+  ⎢  0         ──────           ──────     ⎥
+  ⎣              2                2        ⎦
+
+octave:19> points = rz * rx * base
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    numeric_array_to_sym at line 36 column 14
+    sym at line 353 column 7
+    mtimes at line 65 column 5
+points = (sym 3×3 matrix)
+
+  ⎡cos(b)  -sin(b)⋅cos(a)    sin(a)⋅sin(b) ⎤
+  ⎢──────  ───────────────   ───────────── ⎥
+  ⎢  2            2                2       ⎥
+  ⎢                                        ⎥
+  ⎢sin(b)   cos(a)⋅cos(b)   -sin(a)⋅cos(b) ⎥
+  ⎢──────   ─────────────   ───────────────⎥
+  ⎢  2            2                2       ⎥
+  ⎢                                        ⎥
+  ⎢            sin(a)           cos(a)     ⎥
+  ⎢  0         ──────           ──────     ⎥
+  ⎣              2                2        ⎦
+
+octave:20> subs(points, {a b}, {0 pi/4})
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans = (sym 3×3 matrix)
+
+  ⎡√2  -√2      ⎤
+  ⎢──  ────   0 ⎥
+  ⎢4    4       ⎥
+  ⎢             ⎥
+  ⎢√2   √2      ⎥
+  ⎢──   ──    0 ⎥
+  ⎢4    4       ⎥
+  ⎢             ⎥
+  ⎣0    0    1/2⎦
+
+octave:21> y = [0;1;0]
+y =
+
+   0
+   1
+   0
+
+octave:22> points * y
+ans = (sym 3×1 matrix)
+
+  ⎡-sin(b)⋅cos(a) ⎤
+  ⎢───────────────⎥
+  ⎢       2       ⎥
+  ⎢               ⎥
+  ⎢ cos(a)⋅cos(b) ⎥
+  ⎢ ───────────── ⎥
+  ⎢       2       ⎥
+  ⎢               ⎥
+  ⎢    sin(a)     ⎥
+  ⎢    ──────     ⎥
+  ⎣      2        ⎦
+
+octave:23> points * y * 2
+ans = (sym 3×1 matrix)
+
+  ⎡-sin(b)⋅cos(a)⎤
+  ⎢              ⎥
+  ⎢cos(a)⋅cos(b) ⎥
+  ⎢              ⎥
+  ⎣    sin(a)    ⎦
+
+octave:24> arrayfun(abs, points * y * 2)
+error: Invalid call to abs.  Correct usage is:
+
+ -- abs (Z)
+
+Additional help for built-in functions and operators is
+available in the online version of the manual.  Use the command
+'doc <topic>' to search the manual index.
+
+Help and information about Octave is also available on the WWW
+at http://www.octave.org and via the help@octave.org
+mailing list.
+octave:24> arrayfun(@abs, points * y * 2)
+ans = (sym 3×1 matrix)
+
+  ⎡│sin(b)⋅cos(a)│⎤
+  ⎢               ⎥
+  ⎢│cos(a)⋅cos(b)│⎥
+  ⎢               ⎥
+  ⎣   │sin(a)│    ⎦
+
+octave:25> sum(arrayfun(@abs, points * y * 2))
+ans = (sym) │sin(b)⋅cos(a)│ + │cos(a)⋅cos(b)│ + │sin(a)│
+octave:26> area = sum(arrayfun(@abs, points * y * 2))
+area = (sym) │sin(b)⋅cos(a)│ + │cos(a)⋅cos(b)│ + │sin(a)│
+octave:27> subs(area, {a b}, {0 0})
+ans = (sym) 1
+octave:28> subs(area, {a b}, {0 pi/4})
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans = (sym) √2
+octave:29> subs(area, {a b}, {pi/4 pi/4})
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans = (sym)
+
+  √2    
+  ── + 1
+  2     
+
+octave:30> num(subs(area, {a b}, {pi/4 pi/4}))
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+error: 'num' undefined near line 1 column 1
+octave:30> real(subs(area, {a b}, {pi/4 pi/4}))
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans = (sym)
+
+  √2    
+  ── + 1
+  2     
+
+octave:31> float(subs(area, {a b}, {pi/4 pi/4}))
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+error: 'float' undefined near line 1 column 1
+octave:31> double(subs(area, {a b}, {pi/4 pi/4}))
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans =  1.7071
+octave:32> area
+area = (sym) │sin(b)⋅cos(a)│ + │cos(a)⋅cos(b)│ + │sin(a)│
+octave:33> 6.28319  - 2.52611, 6.28319  - 2.35619
+ans =  3.7571
+ans =  3.9270
+octave:34> syms(area, {a b}, {6.28319  - 2.52611 ; 6.28319  - 2.35619})
+error: syms: expected string inputs
+error: called from
+    assert at line 94 column 11
+    syms at line 101 column 5
+octave:34> syms(area, {a b}, {6.28319  - 2.52611  6.28319  - 2.35619})
+error: syms: expected string inputs
+error: called from
+    assert at line 94 column 11
+    syms at line 101 column 5
+octave:34> syms(area, {a b}, {(6.28319  - 2.52611)  (6.28319  - 2.35619)})
+error: syms: expected string inputs
+error: called from
+    assert at line 94 column 11
+    syms at line 101 column 5
+octave:34> syms(area, {a b}, {3.7571 3.9270})
+error: syms: expected string inputs
+error: called from
+    assert at line 94 column 11
+    syms at line 101 column 5
+octave:34> subs(area, {a b}, {6.28319  - 2.52611 ; 6.28319  - 2.35619})
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+error: array inputs must have same size and shape
+error: called from
+    assert_same_shape at line 21 column 5
+    subs at line 178 column 5
+octave:34> subs(area, {a b}, {(6.28319  - 2.52611)  (6.28319  - 2.35619)})
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans = (sym)
+
+       ⎛3927⎞    ⎛307⋅π⎞      ⎛3927⎞    ⎛307⋅π⎞      ⎛307⋅π⎞
+  - cos⎜────⎟⋅cos⎜─────⎟ - sin⎜────⎟⋅cos⎜─────⎟ + sin⎜─────⎟
+       ⎝1000⎠    ⎝ 1567⎠      ⎝1000⎠    ⎝ 1567⎠      ⎝ 1567⎠
+
+octave:35> double(subs(area, {a b}, {(6.28319  - 2.52611)  (6.28319  - 2.35619)}))
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans =  1.7321
+octave:36> precision
+error: 'precision' undefined near line 1 column 1
+octave:36> format long
+octave:37> double(subs(area, {a b}, {(6.28319  - 2.52611)  (6.28319  - 2.35619)}))
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans =  1.73205080746734
+octave:38> subs(area, {a b}, {3.7571 3.9270})
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans = (sym)
+
+       ⎛3927⎞    ⎛221⋅π⎞      ⎛3927⎞    ⎛221⋅π⎞      ⎛221⋅π⎞
+  - cos⎜────⎟⋅cos⎜─────⎟ - sin⎜────⎟⋅cos⎜─────⎟ + sin⎜─────⎟
+       ⎝1000⎠    ⎝ 1128⎠      ⎝1000⎠    ⎝ 1128⎠      ⎝ 1128⎠
+
+octave:39> double(subs(area, {a b}, {3.7571 3.9270}))
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans =  1.73205080687179
+octave:40> 6.28319  - 2.52611, 6.28319  - 2.35619
+ans =  3.75708000000000
+ans =  3.92700000000000
+NOTICE: Due to inactivity, your session will expire in five minutes.
+Octave Exited. Message: Session Timeout
+
+octave:1> 6.28319  - 2.52611 - pi, 6.28319  - 2.35619 - pi
+ans =  0.61549
+ans =  0.78541
+octave:2> format long
+octave:3> 6.28319  - 2.52611 - pi, 6.28319  - 2.35619 - pi
+ans =  0.615487346410207
+ans =  0.785407346410207
+NOTICE: Due to inactivity, your session will expire in five minutes.
+Octave Exited. Message: Session Timeout
+
+octave:1> double(subs(area, {a b}, {3.7571 3.9270}))
+error: Invalid call to area.  Correct usage is:
+
+ -- area (Y)
+ -- area (X, Y)
+ -- area (..., LVL)
+ -- area (..., PROP, VAL, ...)
+ -- area (HAX, ...)
+ -- H = area (...)
+
+Additional help for built-in functions and operators is
+available in the online version of the manual.  Use the command
+'doc <topic>' to search the manual index.
+
+Help and information about Octave is also available on the WWW
+at http://www.octave.org and via the help@octave.org
+mailing list.
+octave:1> syms a b
+OctSymPy v2.6.0: this is free software without warranty, see source.
+Initializing communication with SymPy using a popen2() pipe.
+Some output from the Python subprocess (pid 9760) might appear next.
+Python 2.7.5 (default, Aug  4 2017, 00:39:18) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-16)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> >>> 
+OctSymPy: Communication established.  SymPy v1.1.2.dev.
+octave:2> area = abs(sin(b)*cos(a)) + abs(cos(a)*cos(b))+abs(sin(a))
+area = (sym) │sin(b)⋅cos(a)│ + │cos(a)⋅cos(b)│ + │sin(a)│
+octave:3> double(subs(area, {a b}, {3.7571 3.9270}))
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans =  1.7321
+octave:4> 6.28319  - 2.52611 - pi, 6.28319  - 2.35619 - pi
+ans =  0.61549
+ans =  0.78541
+octave:5> double(subs(area, {a b}, {0.61549 0.78541}))
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+warning: passing floating-point values to sym is dangerous, see "help sym"
+warning: called from
+    double_to_sym_heuristic at line 50 column 7
+    sym at line 373 column 13
+    subs at line 169 column 13
+ans =  1.7321
+NOTICE: Due to inactivity, your session will expire in five minutes.
+ sin(a) cos(b)]1
